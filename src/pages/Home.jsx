@@ -10,11 +10,14 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  console.log(import.meta.env.VITE_SOME_KEY); // 123
+  console.log(import.meta.env.DB_PASSWORD); // undefined
   useEffect(() => {
     axios
       .get("https://flamingo-apis.vercel.app/api/v1/posts")
       .then((res) => {
         setPosts(res.data);
+        console.log(res.data);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -28,7 +31,7 @@ const Home = () => {
     <div className="p-4">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl my-8">Posts List</h1>
-        <Link to="/books/create">
+        <Link to="/posts/create">
           <MdOutlineAddBox className="text-sky-800 text-4xl" />
         </Link>
       </div>
@@ -49,25 +52,27 @@ const Home = () => {
           <tbody>
             {posts.map((post, index) => (
               <tr key={post.id} className="h-8">
-                <td className="border border-slate-600 rounded-md">
+                <td className="border border-slate-600 rounded-md text-center">
                   {index + 1}
                 </td>
-                <td className="border border-slate-600 rounded-md">
+                <td className="border border-slate-600 rounded-md text-center">
                   {post.title}
                 </td>
-                <td className="border border-slate-600 rounded-md max-md:hidden">
-                  {post.body}
+                <td className="border border-slate-600 rounded-md max-md:hidden text-center">
+                  {post.content}
                 </td>
-                <td className="border border-slate-600 rounded-md">
-                  <Link to={`/posts/${post.id}`}>
-                    <BsInfoCircle className="text-sky-800 text-2xl" />
-                  </Link>
-                  <Link to={`/posts/${post.id}/edit`}>
-                    <AiOutlineEdit className="text-sky-800 text-2xl" />
-                  </Link>
-                  <Link to={`/posts/${post.id}/delete`}>
-                    <MdOutlineDelete className="text-sky-800 text-2xl" />
-                  </Link>
+                <td className="border border-slate-600 rounded-md text-center">
+                  <div className="flex justify-center gap-x-4">
+                    <Link to={`/posts/details/${post.id}`}>
+                      <BsInfoCircle className="text-green-800 text-2xl" />
+                    </Link>
+                    <Link to={`/posts/edit/${post.id}`}>
+                      <AiOutlineEdit className="text-yellow-800 text-2xl" />
+                    </Link>
+                    <Link to={`/posts/delete/${post.id}`}>
+                      <MdOutlineDelete className="text-red-800 text-2xl" />
+                    </Link>
+                  </div>
                 </td>
               </tr>
             ))}

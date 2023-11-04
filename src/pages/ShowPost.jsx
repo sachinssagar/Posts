@@ -10,8 +10,9 @@ const ShowPost = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    setIsLoading(true);
     axios
-      .get(`https://flamingo-apis.vercel.app/api/v1/posts${id}`)
+      .get(`https://flamingo-apis.vercel.app/api/v1/posts/${id}`)
       .then((res) => {
         setPost(res.data);
         setIsLoading(false);
@@ -24,14 +25,33 @@ const ShowPost = () => {
   }, [id]);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="p-4">
       <BackButton />
-      <h1 className="text-3xl font-semibold text-gray-800">Post</h1>
-      {isLoading && <Spinner />}
-      {!isLoading && (
-        <div className="flex flex-col items-center">
-          <h1 className="text-2xl font-semibold text-gray-800">{post.title}</h1>
-          <p className="text-gray-800">{post.body}</p>
+      <h1 className="text-3xl my-4">Show Posts</h1>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <div className="flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4">
+          <div className="my-4">
+            <span className="text-xl mr-4 text-gray-500">Id</span>
+            <span>{post._id}</span>
+          </div>
+          <div className="my-4">
+            <span className="text-xl mr-4 text-gray-500">Title</span>
+            <span>{post.title}</span>
+          </div>
+          <div className="my-4">
+            <span className="text-xl mr-4 text-gray-500">Context</span>
+            <span>{post.context}</span>
+          </div>
+          <div className="my-4">
+            <span className="text-xl mr-4 text-gray-500">Create Time</span>
+            <span>{new Date(post.createdAt).toString()}</span>
+          </div>
+          <div className="my-4">
+            <span className="text-xl mr-4 text-gray-500">Last Update Time</span>
+            <span>{new Date(post.updatedAt).toString()}</span>
+          </div>
         </div>
       )}
     </div>
