@@ -66,7 +66,7 @@ const EditPost = () => {
           />
 
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Context</label>
+            <label className="text-xl mr-4 text-gray-500">Content</label>
             <input
               type="text"
               value={content}

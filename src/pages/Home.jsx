@@ -44,7 +44,7 @@ const Home = () => {
               <th className="border border-slate-600 rounded-md">No</th>
               <th className="border border-slate-600 rounded-md">Title</th>
               <th className="border border-slate-600 rounded-md max-md:hidden">
-                Context
+                Content
               </th>
               <th className="border border-slate-600 rounded-md">Operations</th>
             </tr>

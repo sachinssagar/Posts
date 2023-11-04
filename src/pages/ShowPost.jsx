@@ -22,7 +22,7 @@ const ShowPost = () => {
         alert("Something went wrong");
         console.log(err);
       });
-  }, [id]);
+  }, []);
 
   return (
     <div className="p-4">
@@ -41,8 +41,8 @@ const ShowPost = () => {
             <span>{post.title}</span>
           </div>
           <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Context</span>
-            <span>{post.context}</span>
+            <span className="text-xl mr-4 text-gray-500">Content</span>
+            <span>{post.content}</span>
           </div>
           <div className="my-4">
             <span className="text-xl mr-4 text-gray-500">Create Time</span>
